@@ -1,94 +1,73 @@
 package com.driver;
 
-public class Main {
-    public static void main(String[] args) {
-        Pizza pizza1 = new Pizza("Veg", false);
-        pizza1.addExtraCheese();
-        pizza1.addExtraToppings();
-        pizza1.addPaperBag();
-        System.out.println(pizza1.generateBill());
-
-        DeluxePizza pizza2 = new DeluxePizza("Non-veg", false);
-        pizza2.addExtraCheese();
-        pizza2.addExtraToppings();
-        System.out.println(pizza2.generateBill());
-    }
-}
-
-// Pizza.java
 public class Pizza {
-    protected int basePrice;
-    protected boolean extraCheese;
-    protected boolean extraToppings;
-    protected boolean paperBag;
-    protected int totalPrice;
-
-    public Pizza(String type, boolean isDeluxe) {
-        if (type.equals("Veg")) {
-            basePrice = 300;
-        } else if (type.equals("Non-veg")) {
-            basePrice = 400;
+    /*the price here will be printed on bill*/
+    private int price;
+    //all variable prices
+    public int baseprice;
+    public int ExtraCheeseprice;
+    public int ExtraToppingsprice;
+    public int papaerbagprice;
+    private String bill;
+    boolean ischeeseadded;
+    boolean istoppingdadded;
+    boolean istakeawayadded;
+    boolean isgetbill;
+    public Pizza(Boolean isVeg){
+        // your code goes here
+        this.ExtraCheeseprice=80;
+        this.papaerbagprice=20;
+        if(isVeg){
+            this.baseprice=300;
+            this.ExtraToppingsprice=70;
+        }else{
+            this.baseprice=400;
+            this.ExtraToppingsprice=120;
         }
-
-        if (!isDeluxe) {
-            extraCheese = false;
-            extraToppings = false;
+        this.price=baseprice;
+    }
+    public int getPrice(){
+        return this.price;
+    }
+    public void addExtraCheese(){
+        // your code goes here
+        if(!ischeeseadded){
+            this.price=this.price+ExtraCheeseprice;
+            ischeeseadded=true;
         }
-
-        paperBag = false;
-        totalPrice = basePrice;
+    }
+    public void addExtraToppings(){
+        // your code goes here
+        if(!istoppingdadded){
+            this.price=this.price+ExtraToppingsprice;
+            istoppingdadded=true;
+        }
+    }
+    public void addTakeaway(){
+        // your code goes here
+        if(!istakeawayadded){
+            this.price=this.price+papaerbagprice;
+            istakeawayadded=true;
+        }
     }
 
-    public void addExtraCheese() {
-        if (!extraCheese) {
-            extraCheese = true;
-            totalPrice += 80;
-        }
-    }
+    public String getBill(){
 
-    public void addExtraToppings() {
-        if (!extraToppings) {
-            extraToppings = true;
-            if (basePrice == 300) {
-                totalPrice += 70;
-            } else if (basePrice == 400) {
-                totalPrice += 120;
+        // your code goes here
+        if(!isgetbill){
+            this.bill="Base Price Of The Pizza: "+this.baseprice+"\n";
+            if(ischeeseadded){
+                this.bill=this.bill+"Extra Cheese Added: "+this.ExtraCheeseprice+"\n";
             }
-        }
-    }
-
-    public void addPaperBag() {
-        if (!paperBag) {
-            paperBag = true;
-            totalPrice += 20;
-        }
-    }
-
-    public String generateBill() {
-        StringBuilder bill = new StringBuilder();
-        bill.append("Base Price Of The Pizza: ").append(basePrice).append("\n");
-        if (extraCheese) {
-            bill.append("Extra Cheese Added: 80\n");
-        }
-        if (extraToppings) {
-            if (basePrice == 300) {
-                bill.append("Extra Toppings Added: 70\n");
-            } else if (basePrice == 400) {
-                bill.append("Extra Toppings Added: 120\n");
+            if(istoppingdadded){
+                this.bill=this.bill+"Extra Toppings Added: "+this.ExtraToppingsprice+"\n";
             }
+            if(istakeawayadded){
+                this.bill=this.bill+"Paperbag Added: "+this.papaerbagprice+"\n";
+            }
+            this.bill=this.bill+"Total Price: "+this.price+"\n";
+            isgetbill=true;
         }
-        if (paperBag) {
-            bill.append("Paperbag Added: 20\n");
-        }
-        bill.append("Total Price: ").append(totalPrice).append("\n");
-
-        return bill.toString();
-    }
-}
-
-// DeluxePizza.java
-public class DeluxePizza extends Pizza {
-    public DeluxePizza(String type, boolean isDeluxe) {
-        super(type, true);
+        return this.bill;
     }
 }
