@@ -1,6 +1,7 @@
 package com.driver;
 
 public class Pizza {
+
     /*the price here will be printed on bill*/
     private int price;
     //all variable prices
@@ -8,11 +9,15 @@ public class Pizza {
     public int ExtraCheeseprice;
     public int ExtraToppingsprice;
     public int papaerbagprice;
+
     private String bill;
     boolean ischeeseadded;
     boolean istoppingdadded;
     boolean istakeawayadded;
     boolean isgetbill;
+
+
+
     public Pizza(Boolean isVeg){
         // your code goes here
         this.ExtraCheeseprice=80;
@@ -26,9 +31,11 @@ public class Pizza {
         }
         this.price=baseprice;
     }
+
     public int getPrice(){
         return this.price;
     }
+
     public void addExtraCheese(){
         // your code goes here
         if(!ischeeseadded){
@@ -36,6 +43,7 @@ public class Pizza {
             ischeeseadded=true;
         }
     }
+
     public void addExtraToppings(){
         // your code goes here
         if(!istoppingdadded){
@@ -43,6 +51,7 @@ public class Pizza {
             istoppingdadded=true;
         }
     }
+
     public void addTakeaway(){
         // your code goes here
         if(!istakeawayadded){
@@ -69,5 +78,6 @@ public class Pizza {
             isgetbill=true;
         }
         return this.bill;
+
     }
 }
